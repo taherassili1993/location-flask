@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style type="text/css">
+    input, textarea
+    {
+        border: 1px solid #ccc !important;
+    }
+
+    textarea
+    {
+        height: 500px !important;
+    }
+
+    input:focus, textarea:focus
+    {
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    button
+    {
+        width: 150px !important;
+    }
+</style>
+<div class="column is-6 is-offset-3" style="margin-top: 100px;">
+    <h3 class="title">Ajouter annonce de location maintenant</h3>
+    <div class="box">
+        <form method="POST" action="/ajouter-location" enctype = "multipart/form-data">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="titre" placeholder="Le titre" autofocus="" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea is-large" type="text" name="content" placeholder="Le contenu de votre annonce" autofocus="" required></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="number" name="prix" placeholder="Le prix" autofocus="" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <select class="input is-large" name="ville" placeholder="La ville" autofocus="" required>
+                        <option value="Tunis">Tunis</option>
+                        <option value="Ariana">Ariana</option>
+                        <option value="Ben arous">Ben arous</option>
+                        <option value="Manouba">Manouba</option>
+                        <option value="Sousse">Sousse</option>
+                        <option value="Sfax">Sfax</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="file" name="image" placeholder="L'image" required>
+                </div>
+            </div>
+
+            <button class="button is-block is-info">Ajouter annonce</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
