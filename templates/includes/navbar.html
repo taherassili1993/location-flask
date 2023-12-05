@@ -1,0 +1,56 @@
+<style type="text/css">
+  .recherche:focus
+  {
+    outline: none;
+    box-shadow: none;
+  }
+</style>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" style="margin-left: 100px; margin-top: 10px;">ASSILI Taher Location</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Locations</a>
+        </li>
+
+        
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2 recherche" type="search" placeholder="Trouver location..." aria-label="Search" style="min-width: 300px;">
+      </form>
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        {% if not session['username'] %}
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Se connecter</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">S'inscrire</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Ajouter location</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" style="color: blue;">Bienvenue {{ session['username'] }}</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Se deconnecter</a>
+          </li>
+
+          {% endif %}
+        </ul>
+    </div>
+  </div>
+</nav>

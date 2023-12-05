@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style type="text/css">
+    input
+    {
+        border: 1px solid #ccc !important;
+    }
+
+    input:focus
+    {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+</style>
+
+<div class="column is-4 is-offset-4" style="margin-top: 100px;">
+    <h3 class="title">Inscrire maintenant</h3>
+    <div class="box">
+        <form method="POST" action="/signup">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Nom" autofocus="" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Inscrire</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
