@@ -7,7 +7,7 @@ from database import db
 location_app = Blueprint('location_app', __name__, template_folder='templates')
 
 @location_app.route('/ajouter-location')
-def location():
+def ajouter_location():
 
     return render_template("ajouter_location.html")
 
@@ -36,5 +36,21 @@ def location_post():
     cursor.execute('select id from locations where titre = %s and content = %s and user_id = %s', (titre, content, user_id))
     findLocation = cursor.fetchone()
 
-    return redirect(url_for('index_app.welcome'))
-    #return redirect(url_for('location_app.location', id = findLocation[0]))
+    return redirect(url_for('location_app.location', id = findLocation[0]))
+
+@location_app.route('/locations/<id>')
+def location(id):
+    db_config = db.db_config
+
+    db_conn = pymysql.connect(**db_config)
+    cursor = db_conn.cursor()
+
+    cursor.execute('select id, titre, content, prix, ville, image, user_id, created_at from locations where id = %s', (id))
+    findLocation = cursor.fetchone()
+    if not findLocation:
+        return redirect(url_for('index_app.welcome'))
+
+    cursor.execute('select id, name, email from users where id = %s', (findLocation[6]))
+    findUser = cursor.fetchone()
+
+    return render_template("location.html", location = findLocation, user = findUser)
