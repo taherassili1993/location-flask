@@ -17,4 +17,8 @@ def welcome():
     cursor.execute(sql)
     cursor.execute(sql_location)
 
-    return render_template("index.html")
+    cursor.execute('select id, titre, prix, ville, image, created_at from locations limit 2')
+    locations = cursor.fetchall()
+
+    return render_template("index.html", locations = locations)
+
