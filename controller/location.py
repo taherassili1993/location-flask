@@ -65,3 +65,19 @@ def locations():
     cursor.execute('select id, titre, prix, ville, image, created_at from locations')
     locations = cursor.fetchall()
     return render_template("locations.html", locations = locations)
+
+@location_app.route('/recherche')
+def recherche_locations():
+    q = username = request.args.get('q')
+
+    if not q:
+        return redirect(url_for('index_app.welcome'))
+
+    db_config = db.db_config
+
+    db_conn = pymysql.connect(**db_config)
+    cursor = db_conn.cursor()
+
+    cursor.execute("select id, titre, prix, ville, image, created_at from locations where titre like CONCAT('%%', %s, '%%')  or content like CONCAT('%%', %s, '%%')", (q, q))
+    locations = cursor.fetchall()
+    return render_template("recherche.html", locations = locations)
