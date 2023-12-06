@@ -54,3 +54,14 @@ def location(id):
     findUser = cursor.fetchone()
 
     return render_template("location.html", location = findLocation, user = findUser)
+
+@location_app.route('/locations')
+def locations():
+    db_config = db.db_config
+
+    db_conn = pymysql.connect(**db_config)
+    cursor = db_conn.cursor()
+
+    cursor.execute('select id, titre, prix, ville, image, created_at from locations')
+    locations = cursor.fetchall()
+    return render_template("locations.html", locations = locations)
